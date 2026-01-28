@@ -26,7 +26,11 @@ const SLIDES = [
 ];
 
 export function HeroSlideshow() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    duration: 30,
+    skipSnaps: false
+  }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -37,12 +41,12 @@ export function HeroSlideshow() {
   }, [emblaApi]);
 
   return (
-    <div className="relative w-full h-[100vh] overflow-hidden bg-black">
+    <div className="relative w-full h-screen overflow-hidden bg-black">
       <div className="embla w-full h-full" ref={emblaRef}>
         <div className="embla__container flex w-full h-full">
           {SLIDES.map((slide) => (
             <div key={slide.id} className="embla__slide relative w-full h-full flex-[0_0_100%]">
-              <div className="absolute inset-0 bg-black/40 z-10" /> {/* Overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-10" />
               <img
                 src={slide.image}
                 alt={slide.title}
@@ -51,19 +55,19 @@ export function HeroSlideshow() {
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
                 <motion.h1 
                   key={slide.title}
-                  initial={{ y: 30, opacity: 0 }}
+                  initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="font-serif text-5xl md:text-7xl lg:text-9xl font-bold text-white mb-4 drop-shadow-lg"
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]"
                 >
                   {slide.title}
                 </motion.h1>
                 <motion.p
                   key={slide.subtitle}
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="font-sans text-xl md:text-2xl text-white/90 font-light tracking-widest uppercase drop-shadow-md"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.3 }}
+                  className="font-sans text-xl md:text-3xl text-white/90 font-light tracking-[0.3em] uppercase drop-shadow-md"
                 >
                   {slide.subtitle}
                 </motion.p>
@@ -76,23 +80,19 @@ export function HeroSlideshow() {
       {/* Navigation Arrows */}
       <button 
         onClick={scrollPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-black/20 text-white hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-sm group"
+        className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-white/10 text-white hover:bg-primary transition-all duration-500 backdrop-blur-md border border-white/20 group shadow-2xl"
       >
-        <ChevronLeft size={32} className="group-hover:-translate-x-1 transition-transform" />
+        <ChevronLeft size={40} className="group-hover:-translate-x-1 transition-transform" />
       </button>
       <button 
         onClick={scrollNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-black/20 text-white hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-sm group"
+        className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-white/10 text-white hover:bg-primary transition-all duration-500 backdrop-blur-md border border-white/20 group shadow-2xl"
       >
-        <ChevronRight size={32} className="group-hover:translate-x-1 transition-transform" />
+        <ChevronRight size={40} className="group-hover:translate-x-1 transition-transform" />
       </button>
       
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center pt-2">
-          <div className="w-1 h-3 bg-white rounded-full" />
-        </div>
-      </div>
+      {/* Visual Depth Gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20" />
     </div>
   );
 }
