@@ -58,7 +58,7 @@ export function HeroSlideshow() {
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]"
+                  className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]"
                 >
                   {slide.title}
                 </motion.h1>
@@ -67,7 +67,7 @@ export function HeroSlideshow() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 1, delay: 0.3 }}
-                  className="font-sans text-xl md:text-3xl text-white/90 font-light tracking-[0.3em] uppercase drop-shadow-md"
+                  className="font-sans text-sm sm:text-lg md:text-2xl lg:text-3xl text-white/90 font-light tracking-[0.2em] sm:tracking-[0.3em] uppercase drop-shadow-md"
                 >
                   {slide.subtitle}
                 </motion.p>
@@ -77,18 +77,18 @@ export function HeroSlideshow() {
         </div>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Smaller and placed at edges */}
       <button 
         onClick={scrollPrev}
-        className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-white/10 text-white hover:bg-primary transition-all duration-500 backdrop-blur-md border border-white/20 group shadow-2xl"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-white/5 text-white hover:bg-primary transition-all duration-500 backdrop-blur-sm border border-white/10 group shadow-lg"
       >
-        <ChevronLeft size={40} className="group-hover:-translate-x-1 transition-transform" />
+        <ChevronLeft size={24} className="sm:w-8 sm:h-8 group-hover:-translate-x-1 transition-transform" />
       </button>
       <button 
         onClick={scrollNext}
-        className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-white/10 text-white hover:bg-primary transition-all duration-500 backdrop-blur-md border border-white/20 group shadow-2xl"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-white/5 text-white hover:bg-primary transition-all duration-500 backdrop-blur-sm border border-white/10 group shadow-lg"
       >
-        <ChevronRight size={40} className="group-hover:translate-x-1 transition-transform" />
+        <ChevronRight size={24} className="sm:w-8 sm:h-8 group-hover:translate-x-1 transition-transform" />
       </button>
       
       {/* Visual Depth Gradient */}

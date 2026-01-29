@@ -15,7 +15,7 @@ export function Navbar() {
     
     const interval = setInterval(() => {
       setIsTelugu(prev => !prev);
-    }, 4000);
+    }, 5000); // Slower transition for smoothness
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -35,56 +35,45 @@ export function Navbar() {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        scrolled || isOpen ? "bg-primary shadow-lg py-2" : "bg-transparent py-4"
+        scrolled || isOpen ? "bg-primary shadow-lg py-1" : "bg-transparent py-4"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between overflow-hidden">
         {/* Left Logo */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 w-12 md:w-16">
           <img 
             src="/src/assets/deity_logo.png" 
             alt="Cultural Logo" 
-            className="h-16 w-16 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+            className="h-12 w-12 md:h-16 md:w-16 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
           />
         </div>
         
-        {/* Centered Symmetrical Title */}
-        <div className="flex-grow flex flex-col items-center justify-center overflow-hidden h-16 relative">
+        {/* Centered Symmetrical Title - Responsive Font Size */}
+        <div className="flex-grow flex flex-col items-center justify-center overflow-hidden h-16 relative px-2">
           <AnimatePresence mode="wait">
-            {isTelugu ? (
-              <motion.h1
-                key="telugu"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -30, opacity: 0 }}
-                transition={{ duration: 0.8, ease: "anticipate" }}
-                className="text-2xl md:text-4xl font-serif font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] text-center whitespace-nowrap animate-pulse"
-              >
-                తెలుగు సమితి, ఐఐటీ ఢిల్లీ
-              </motion.h1>
-            ) : (
-              <motion.h1
-                key="english"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -30, opacity: 0 }}
-                transition={{ duration: 0.8, ease: "anticipate" }}
-                className="text-2xl md:text-4xl font-serif font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] text-center whitespace-nowrap animate-pulse"
-              >
-                Telugu Samiti, IIT Delhi
-              </motion.h1>
-            )}
+            <motion.div
+              key={isTelugu ? "telugu" : "english"}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }} // Smoother transition
+              className="text-center"
+            >
+              <h1 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-serif font-bold text-white drop-shadow-[0_0_10px_rgba(255,215,0,0.6)] whitespace-normal line-clamp-2 leading-tight animate-pulse">
+                {isTelugu ? "తెలుగు సమితి, ఐఐటీ ఢిల్లీ" : "Telugu Samiti, IIT Delhi"}
+              </h1>
+            </motion.div>
           </AnimatePresence>
         </div>
 
         {/* Right 3-Pin Menu */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 w-12 md:w-16 flex justify-end">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-full text-white hover:bg-white/10 transition-colors"
+            className="p-1 rounded-full text-white hover:bg-white/10 transition-colors"
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -94,7 +83,7 @@ export function Navbar() {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
                 >
-                  <X size={36} />
+                  <X size={28} className="md:w-9 md:h-9" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -102,11 +91,11 @@ export function Navbar() {
                   initial={{ rotate: 90, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: -90, opacity: 0 }}
-                  className="flex flex-col space-y-1.5"
+                  className="flex flex-col space-y-1 md:space-y-1.5"
                 >
-                  <span className="w-9 h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
-                  <span className="w-9 h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
-                  <span className="w-9 h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
+                  <span className="w-6 h-1 md:w-8 md:h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
+                  <span className="w-6 h-1 md:w-8 md:h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
+                  <span className="w-6 h-1 md:w-8 md:h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -128,7 +117,7 @@ export function Navbar() {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="text-3xl font-serif font-bold text-white hover:text-secondary pl-4 border-l-4 border-transparent hover:border-secondary transition-all"
+                  className="text-2xl font-serif font-bold text-white hover:text-secondary pl-4 border-l-4 border-transparent hover:border-secondary transition-all"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
