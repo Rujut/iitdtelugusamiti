@@ -64,10 +64,16 @@
     @apply bg-background text-foreground overflow-x-hidden w-full;
     margin: 0;
     padding: 0;
+    scrollbar-width: none; /* Hide for Firefox */
+    -ms-overflow-style: none; /* Hide for IE/Edge */
+  }
+  
+  /* Hide for Chrome/Safari */
+  body::-webkit-scrollbar {
+    display: none;
   }
 }
 
-/* Fix for horizontal scroll issues */
 #root {
   @apply w-full overflow-x-hidden;
 }

@@ -2,9 +2,9 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { NoticeBoard } from "@/components/NoticeBoard";
 import { FeedbackSection } from "@/components/FeedbackSection";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { BookOpen, Languages, Calendar, ArrowRight, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Languages, Github, Linkedin, Twitter, Instagram, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Bilingual Content
@@ -22,128 +22,135 @@ const aboutContent = {
 };
 
 const EVENTS = [
-  { id: 1, title: "Ugadi Celebration", date: "March 22, 2026", type: "Festival" },
-  { id: 2, title: "Freshers Night", date: "August 15, 2026", type: "Cultural" },
-  { id: 3, title: "Farewell 2026", date: "April 20, 2026", type: "Gathering" },
-  { id: 4, title: "Sankranti Potluck", date: "January 14, 2027", type: "Food" },
-  { id: 5, title: "Alumni Meet", date: "December 10, 2026", type: "Networking" },
+  { id: 1, title: "Ugadi", date: "March 22, 2026", image: "/src/assets/ugadi.png" },
+  { id: 2, title: "Freshers", date: "August 15, 2026", image: "/src/assets/freshers.png" },
+  { id: 3, title: "Farewell", date: "April 20, 2026", image: "/src/assets/farewell.png" },
 ];
 
 export default function Home() {
   const [lang, setLang] = useState<"english" | "telugu">("english");
-  const [isFlipped, setIsFlipped] = useState(false);
 
   const toggleLang = () => {
-    setIsFlipped(!isFlipped);
-    setTimeout(() => {
-      setLang(l => l === "english" ? "telugu" : "english");
-      setIsFlipped(false);
-    }, 300); // Wait for half flip
+    setLang(l => l === "english" ? "telugu" : "english");
   };
 
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
+    <div className="w-full bg-background font-sans selection:bg-primary/20">
       <Navbar />
       
-      <main>
+      <main className="w-full">
         <HeroSlideshow />
-        <NoticeBoard />
 
-        {/* About Section - Book Flip Style */}
-        <section id="about" className="container mx-auto px-4 py-20">
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
-            <div className="lg:w-1/2 relative perspective-1000">
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative z-10"
-              >
-                <div className="section-box bg-white p-10 md:p-14 min-h-[400px] flex flex-col justify-center relative overflow-hidden group">
-                  {/* Decorative background elements */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-secondary/20 transition-all duration-700"></div>
-                  
-                  <div className="flex justify-between items-start mb-6">
-                    <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">
-                      {aboutContent[lang].title}
-                    </h3>
-                    <button 
-                      onClick={toggleLang}
-                      className="p-3 rounded-full bg-muted hover:bg-secondary/20 transition-colors text-foreground"
-                      title="Switch Language"
-                    >
-                      <Languages size={24} />
-                    </button>
-                  </div>
-
-                  <motion.div
-                    animate={{ rotateY: isFlipped ? 90 : 0, opacity: isFlipped ? 0 : 1 }}
-                    transition={{ duration: 0.3 }}
+        {/* About Section - Moved up and implemented Translation Logic */}
+        <section id="about" className="w-full py-20 px-4 md:px-0">
+          <div className="max-w-7xl mx-auto flex flex-col items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full max-w-4xl"
+            >
+              <div className="section-box bg-white p-8 md:p-16 flex flex-col relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-secondary/10 transition-all duration-700"></div>
+                
+                <div className="flex justify-between items-center mb-8">
+                  <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">
+                    {aboutContent[lang].title}
+                  </h3>
+                  <button 
+                    onClick={toggleLang}
+                    className="p-4 rounded-full bg-muted hover:bg-secondary/20 transition-all text-primary shadow-sm hover:shadow-md active:scale-95"
+                    title="Switch Language"
                   >
-                    <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
+                    <Languages size={28} />
+                  </button>
+                </div>
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={lang}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-10">
                       {aboutContent[lang].text}
                     </p>
                     
-                    <Button className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 rounded-full group-hover:shadow-lg transition-all">
+                    <Button className="bg-primary hover:bg-primary/90 text-white text-xl px-10 py-8 rounded-full shadow-lg hover:shadow-xl transition-all">
                       {aboutContent[lang].button}
                     </Button>
                   </motion.div>
-                </div>
-              </motion.div>
-              
-              {/* Box Shadow/Depth effect */}
-              <div className="absolute inset-0 bg-black/5 rounded-xl translate-y-4 translate-x-4 -z-10"></div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <NoticeBoard />
+
+        {/* Events Section - BSW Style Card Stack */}
+        <section id="events" className="w-full py-20 bg-slate-50/50">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="flex flex-col items-center mb-12">
+              <div className="w-24 h-1 bg-secondary rounded-full mb-4"></div>
+              <h2 className="text-5xl font-serif font-bold text-foreground">Events</h2>
+              <div className="w-24 h-1 bg-secondary rounded-full mt-4"></div>
             </div>
 
-            {/* Events Section - Auto Scroll */}
-            <div id="events" className="lg:w-1/2 w-full">
-              <div className="section-box bg-slate-50 p-8 h-[450px] flex flex-col relative">
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
-                  <h3 className="text-3xl font-serif font-bold text-foreground">Upcoming Events</h3>
-                  <Calendar className="text-secondary w-8 h-8" />
-                </div>
-
-                <div className="overflow-hidden relative flex-1 mask-linear-gradient">
-                  <div className="animate-scroll-vertical space-y-4 hover:pause-animation">
-                    {[...EVENTS, ...EVENTS].map((event, i) => ( // Duplicated for seamless scroll
-                      <div key={`${event.id}-${i}`} className="bg-white p-5 rounded-lg border border-border/50 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between group cursor-pointer">
-                        <div>
-                          <h4 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">{event.title}</h4>
-                          <span className="text-sm text-muted-foreground font-medium bg-muted px-2 py-1 rounded mt-1 inline-block">{event.type}</span>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-mono text-sm font-bold text-secondary-foreground/80">{event.date}</p>
-                          <ArrowRight className="inline-block w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
-                        </div>
-                      </div>
-                    ))}
+            <div className="flex flex-col space-y-10">
+              {EVENTS.map((event, index) => (
+                <motion.div
+                  key={event.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative group cursor-pointer overflow-hidden rounded-[2rem] shadow-2xl aspect-[16/10] md:aspect-[21/9]"
+                >
+                  <img 
+                    src={event.image} 
+                    alt={event.title} 
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                  
+                  <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between">
+                    <div>
+                      <div className="w-12 h-1 bg-secondary rounded-full mb-3"></div>
+                      <h3 className="text-4xl md:text-5xl font-serif font-bold text-white mb-2">{event.title}</h3>
+                      <p className="text-white/70 font-mono tracking-widest text-sm md:text-base">{event.date}</p>
+                    </div>
+                    
+                    <button className="bg-white/10 hover:bg-secondary text-white p-4 rounded-2xl backdrop-blur-md transition-all duration-300 group/btn shadow-xl border border-white/10">
+                      <span className="flex items-center gap-3 font-bold uppercase tracking-widest text-xs md:text-sm">
+                        View All
+                        <ArrowUpRight className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                      </span>
+                    </button>
                   </div>
-                  {/* Gradient overlays for smooth scroll fade */}
-                  <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none"></div>
-                  <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none"></div>
-                </div>
-              </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Team Section Placeholder */}
-        <section className="bg-muted/30 py-20 border-y border-border/50">
-          <div className="container mx-auto px-4 text-center">
-             <h2 className="text-4xl font-serif font-bold mb-12">Key Contributors</h2>
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="bg-muted/10 py-20 border-y border-border/30">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+             <h2 className="text-4xl font-serif font-bold mb-16">Key Contributors</h2>
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
                {[1, 2, 3, 4].map((i) => (
                  <div key={i} className="group">
-                   <div className="aspect-square bg-white rounded-2xl overflow-hidden shadow-md mb-4 relative">
+                   <div className="aspect-square bg-white rounded-3xl overflow-hidden shadow-xl mb-6 relative">
                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`} alt="Team Member" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                     <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
-                        <Linkedin className="text-white w-6 h-6 hover:scale-110 cursor-pointer transition-transform" />
-                        <Twitter className="text-white w-6 h-6 hover:scale-110 cursor-pointer transition-transform" />
+                     <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-6">
+                        <Linkedin className="text-white w-8 h-8 hover:scale-110 cursor-pointer transition-transform" />
+                        <Twitter className="text-white w-8 h-8 hover:scale-110 cursor-pointer transition-transform" />
                      </div>
                    </div>
-                   <h4 className="font-bold text-lg">Member Name</h4>
-                   <p className="text-muted-foreground text-sm">Designation</p>
+                   <h4 className="font-bold text-2xl">Member Name</h4>
+                   <p className="text-muted-foreground text-base">Designation</p>
                  </div>
                ))}
              </div>
@@ -154,24 +161,26 @@ export default function Home() {
 
       </main>
 
-      <footer className="bg-foreground text-white py-12">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
-             <img src="/src/assets/logo.png" alt="Logo" className="h-12 w-auto bg-white rounded-full p-1" />
+      <footer className="bg-foreground text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-10">
+          <div className="flex items-center gap-6">
+             <div className="w-16 h-16 rounded-full bg-white p-1 shadow-lg">
+                <img src="/src/assets/logo.png" alt="Logo" className="w-full h-full object-contain rounded-full" />
+             </div>
              <div>
-               <h4 className="font-serif font-bold text-xl">Telugu Samiti</h4>
-               <p className="text-white/60 text-sm">IIT Delhi</p>
+               <h4 className="font-serif font-bold text-2xl">Telugu Samiti</h4>
+               <p className="text-white/60 text-base">IIT Delhi</p>
              </div>
           </div>
           
-          <div className="flex space-x-6">
-            <a href="#" className="hover:text-secondary transition-colors"><Instagram size={24} /></a>
-            <a href="#" className="hover:text-secondary transition-colors"><Twitter size={24} /></a>
-            <a href="#" className="hover:text-secondary transition-colors"><Linkedin size={24} /></a>
-            <a href="#" className="hover:text-secondary transition-colors"><Github size={24} /></a>
+          <div className="flex space-x-8">
+            <a href="#" className="hover:text-secondary transition-all hover:scale-110"><Instagram size={28} /></a>
+            <a href="#" className="hover:text-secondary transition-all hover:scale-110"><Twitter size={28} /></a>
+            <a href="#" className="hover:text-secondary transition-all hover:scale-110"><Linkedin size={28} /></a>
+            <a href="#" className="hover:text-secondary transition-all hover:scale-110"><Github size={28} /></a>
           </div>
 
-          <div className="text-center md:text-right text-sm text-white/40">
+          <div className="text-center md:text-right text-base text-white/40">
             <p>&copy; 2026 Telugu Samiti. Made with love.</p>
           </div>
         </div>

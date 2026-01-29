@@ -15,7 +15,7 @@ export function Navbar() {
     
     const interval = setInterval(() => {
       setIsTelugu(prev => !prev);
-    }, 5000); // Slower transition for smoothness
+    }, 5000);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -39,30 +39,30 @@ export function Navbar() {
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between overflow-hidden">
-        {/* Left Logo */}
-        <div className="flex-shrink-0 w-12 md:w-16">
+      <div className="w-full px-4 h-20 flex items-center justify-between overflow-hidden">
+        {/* Left Logo - Circular Mask Sticker Look */}
+        <div className="flex-shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 border-white/50 shadow-lg bg-white p-1 ml-2">
           <img 
             src="/src/assets/deity_logo.png" 
             alt="Cultural Logo" 
-            className="h-12 w-12 md:h-16 md:w-16 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+            className="h-full w-full object-contain rounded-full"
           />
         </div>
         
-        {/* Centered Symmetrical Title - Responsive Font Size */}
-        <div className="flex-grow flex flex-col items-center justify-center overflow-hidden h-16 relative px-2">
+        {/* Dynamic Responsive Title */}
+        <div className="flex-grow flex items-center justify-center overflow-hidden px-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={isTelugu ? "telugu" : "english"}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }} // Smoother transition
-              className="text-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className="w-full text-center"
             >
-              <h1 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-serif font-bold text-white drop-shadow-[0_0_10px_rgba(255,215,0,0.6)] whitespace-normal line-clamp-2 leading-tight animate-pulse">
+              <h1 className="text-[clamp(1rem,4vw,2.5rem)] font-serif font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] whitespace-nowrap leading-tight animate-pulse transition-all duration-500">
                 {isTelugu ? "తెలుగు సమితి, ఐఐటీ ఢిల్లీ" : "Telugu Samiti, IIT Delhi"}
               </h1>
             </motion.div>
@@ -70,10 +70,10 @@ export function Navbar() {
         </div>
 
         {/* Right 3-Pin Menu */}
-        <div className="flex-shrink-0 w-12 md:w-16 flex justify-end">
+        <div className="flex-shrink-0 mr-2">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1 rounded-full text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-full text-white hover:bg-white/10 transition-colors"
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -83,7 +83,7 @@ export function Navbar() {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
                 >
-                  <X size={28} className="md:w-9 md:h-9" />
+                  <X size={36} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -91,11 +91,11 @@ export function Navbar() {
                   initial={{ rotate: 90, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: -90, opacity: 0 }}
-                  className="flex flex-col space-y-1 md:space-y-1.5"
+                  className="flex flex-col space-y-1.5"
                 >
-                  <span className="w-6 h-1 md:w-8 md:h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
-                  <span className="w-6 h-1 md:w-8 md:h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
-                  <span className="w-6 h-1 md:w-8 md:h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
+                  <span className="w-9 h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
+                  <span className="w-9 h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
+                  <span className="w-9 h-1 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.5)]"></span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -103,7 +103,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -112,12 +112,12 @@ export function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             className="bg-primary border-t border-white/10 overflow-hidden"
           >
-            <div className="container mx-auto px-6 py-8 flex flex-col space-y-6">
+            <div className="w-full px-6 py-8 flex flex-col space-y-6">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="text-2xl font-serif font-bold text-white hover:text-secondary pl-4 border-l-4 border-transparent hover:border-secondary transition-all"
+                  className="text-3xl font-serif font-bold text-white hover:text-secondary pl-4 border-l-4 border-transparent hover:border-secondary transition-all"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
