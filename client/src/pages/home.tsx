@@ -2,12 +2,11 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { NoticeBoard } from "@/components/NoticeBoard";
 import { FeedbackSection } from "@/components/FeedbackSection";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState } from "react";
 import { Languages, Github, Linkedin, Twitter, Instagram, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Bilingual Content
 const aboutContent = {
   english: {
     title: "About Telugu Samiti",
@@ -22,13 +21,16 @@ const aboutContent = {
 };
 
 const EVENTS = [
-  { id: 1, title: "Ugadi", date: "March 22, 2026", image: "/src/assets/ugadi.png" },
-  { id: 2, title: "Freshers", date: "August 15, 2026", image: "/src/assets/freshers.png" },
-  { id: 3, title: "Farewell", date: "April 20, 2026", image: "/src/assets/farewell.png" },
+  { id: 1, title: "Ugadi", image: "/src/assets/ugadi.png" },
+  { id: 2, title: "Freshers", image: "/src/assets/freshers.png" },
+  { id: 3, title: "Farewell", image: "/src/assets/farewell.png" },
 ];
 
 export default function Home() {
   const [lang, setLang] = useState<"english" | "telugu">("english");
+  const { scrollY } = useScroll();
+  const malaY = useTransform(scrollY, [0, 500], [0, 100]);
+  const malaOpacity = useTransform(scrollY, [0, 300], [0, 1]);
 
   const toggleLang = () => {
     setLang(l => l === "english" ? "telugu" : "english");
@@ -41,8 +43,21 @@ export default function Home() {
       <main className="w-full">
         <HeroSlideshow />
 
-        {/* About Section - Moved up and implemented Translation Logic */}
-        <section id="about" className="w-full py-20 px-4 md:px-0">
+        {/* Flower Mala Separator */}
+        <div className="relative w-full h-24 z-40 -mt-1 bg-[#3a7bd5]"> {/* Match blue line background */}
+           <motion.div 
+             style={{ y: malaY, opacity: malaOpacity }}
+             className="absolute top-0 left-0 w-full h-full"
+           >
+             <div 
+               className="w-full h-full bg-repeat-x bg-contain"
+               style={{ backgroundImage: "url('/src/assets/mala_separator.png')" }}
+             />
+           </motion.div>
+        </div>
+
+        {/* About Section */}
+        <section id="about" className="w-full py-20 px-4 md:px-0 bg-background relative z-30">
           <div className="max-w-7xl mx-auto flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -78,7 +93,7 @@ export default function Home() {
                       {aboutContent[lang].text}
                     </p>
                     
-                    <Button className="bg-primary hover:bg-primary/90 text-white text-xl px-10 py-8 rounded-full shadow-lg hover:shadow-xl transition-all">
+                    <Button className="bg-primary hover:bg-primary/90 text-white text-lg px-6 py-4 rounded-full shadow-md hover:shadow-lg transition-all scale-90 md:scale-100">
                       {aboutContent[lang].button}
                     </Button>
                   </motion.div>
@@ -90,7 +105,7 @@ export default function Home() {
 
         <NoticeBoard />
 
-        {/* Events Section - BSW Style Card Stack */}
+        {/* Events Section */}
         <section id="events" className="w-full py-20 bg-slate-50/50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex flex-col items-center mb-12">
@@ -119,14 +134,13 @@ export default function Home() {
                   <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between">
                     <div>
                       <div className="w-12 h-1 bg-secondary rounded-full mb-3"></div>
-                      <h3 className="text-4xl md:text-5xl font-serif font-bold text-white mb-2">{event.title}</h3>
-                      <p className="text-white/70 font-mono tracking-widest text-sm md:text-base">{event.date}</p>
+                      <h3 className="text-4xl md:text-5xl font-serif font-bold text-white">{event.title}</h3>
                     </div>
                     
-                    <button className="bg-white/10 hover:bg-secondary text-white p-4 rounded-2xl backdrop-blur-md transition-all duration-300 group/btn shadow-xl border border-white/10">
-                      <span className="flex items-center gap-3 font-bold uppercase tracking-widest text-xs md:text-sm">
-                        View All
-                        <ArrowUpRight className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                    <button className="bg-white/10 hover:bg-secondary text-white p-3 md:p-4 rounded-xl backdrop-blur-md transition-all duration-300 group/btn shadow-xl border border-white/10 scale-75 md:scale-90">
+                      <span className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+                        View
+                        <ArrowUpRight className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform w-3 h-3 md:w-4 md:h-4" />
                       </span>
                     </button>
                   </div>

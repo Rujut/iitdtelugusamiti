@@ -29,7 +29,9 @@ export function HeroSlideshow() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
     duration: 30,
-    skipSnaps: false
+    skipSnaps: false,
+    align: "start",
+    containScroll: "trimSnaps"
   }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
 
   const scrollPrev = useCallback(() => {
@@ -42,10 +44,10 @@ export function HeroSlideshow() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
-      <div className="embla w-full h-full" ref={emblaRef}>
+      <div className="embla w-full h-full overflow-hidden" ref={emblaRef}>
         <div className="embla__container flex w-full h-full">
           {SLIDES.map((slide) => (
-            <div key={slide.id} className="embla__slide relative w-full h-full flex-[0_0_100%]">
+            <div key={slide.id} className="embla__slide relative w-full h-full flex-[0_0_100%] overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-10" />
               <img
                 src={slide.image}
@@ -77,7 +79,6 @@ export function HeroSlideshow() {
         </div>
       </div>
 
-      {/* Navigation Arrows - Smaller and placed at edges */}
       <button 
         onClick={scrollPrev}
         className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-white/5 text-white hover:bg-primary transition-all duration-500 backdrop-blur-sm border border-white/10 group shadow-lg"
@@ -91,7 +92,6 @@ export function HeroSlideshow() {
         <ChevronRight size={24} className="sm:w-8 sm:h-8 group-hover:translate-x-1 transition-transform" />
       </button>
       
-      {/* Visual Depth Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20" />
     </div>
   );
