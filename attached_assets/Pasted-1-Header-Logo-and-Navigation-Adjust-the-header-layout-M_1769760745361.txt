@@ -1,0 +1,29 @@
+1. Header, Logo, and Navigation
+"Adjust the header layout: Move the logo to the far left and the hamburger menu to the far right to maximize space for the Title. Increase the font size of the 'Telugu Samiti, IIT Delhi' title and ensure it is perfectly centered between the logo and the menu. In the menu bar, add 'Gallery' between 'Home' and 'About'. Decrease the menu font size so it is smaller than the main header title, and add a subtle color transition (gradient or fade) between the header background and the menu list."
+
+2. Synchronization and Smooth Loading
+"Optimize the page load synchronization: Ensure the header title and the hero slideshow images appear simultaneously on refresh, rather than loading at different times. Additionally, remove the blue section separator below the slideshow and replace it with a subtle, modern line separator positioned slightly lower."
+
+3. Announcements (Notice Board) and Event Cards
+"Rename the 'Notice Board' section to 'Announcements' and remove the 'Latest Updates' text. Make the 'NEW' badges glow with a bright, pulsing animation. For the three Event cards (Ugadi, Freshers, Farewell), add a scroll-triggered entrance animation similar to the motion used for the 'Total Visits' and 'Experience' sections."
+
+4. Interactive Experience Box
+"In the 'How was your experience?' section, remove the 'Useful' and 'Not Useful' buttons. Fix the selection logic for the rating icons (Loved it, Good, etc.): a second click on a selected icon should deselect it, and selecting a new icon should automatically deselect the previous one."
+
+5. Dynamic Total Visits Counter
+"Modify the 'Total Visits' box:
+
+Display: Show 'Total Visits' and the number (formatted in 'K' units, e.g., 12.5K) on the first line. Keep 'Join the community growing everyday!' on the second line.
+
+Animation: When the section scrolls into view, make the digits of the counter scroll/roll smoothly until they settle on the actual number."
+
+6. Contributor Sections and Footer
+"In the 'Key Contributors' section, group the first two profile photos under a heading titled 'Meet our Faculty' and the next two under a heading titled 'Designers'.
+
+Footer Update:
+
+Add the text 'Follow us on' above the social media icons.
+
+Ensure the icons for Instagram, LinkedIn, and Gmail use their official brand styles/colors.
+
+Update the copyright section to read: '© 2026 Telugu Samiti IIT Delhi. Telugu Samiti Tech Team. Made with {red heart symbol} by Telugu Samiti Tech Team'"
