@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 function RollingNumber({ value, isInView }: { value: number; isInView: boolean }) {
   const spring = useSpring(0, { stiffness: 40, damping: 20 });
-  const displayValue = useTransform(spring, (current) => current.toFixed(1));
+  const [displayValue, setDisplayValue] = useState("0.0");
 
   useEffect(() => {
     if (isInView) {
@@ -14,6 +14,13 @@ function RollingNumber({ value, isInView }: { value: number; isInView: boolean }
       spring.set(0);
     }
   }, [isInView, value, spring]);
+
+  useEffect(() => {
+    const unsubscribe = spring.on("change", (latest) => {
+      setDisplayValue(latest.toFixed(1));
+    });
+    return () => unsubscribe();
+  }, [spring]);
 
   return <span>{displayValue}</span>;
 }

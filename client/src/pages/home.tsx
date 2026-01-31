@@ -96,7 +96,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex flex-col items-center mb-16">
               <div className="w-20 h-1 bg-secondary rounded-full mb-4"></div>
-              <h2 className="text-[clamp(1rem,5vw,3rem)] font-serif font-bold text-foreground">Events</h2>
+              <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-serif font-bold text-foreground">Events</h2>
               <div className="w-20 h-1 bg-secondary rounded-full mt-4"></div>
             </div>
 
@@ -141,18 +141,18 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="mb-24">
               <h2 className="text-5xl font-serif font-bold mb-16 text-center text-primary">Meet our Faculty</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:gap-16 max-w-4xl mx-auto">
                 {[1, 2].map((i) => (
                   <div key={i} className="group text-center">
-                    <div className="aspect-square bg-white rounded-[3rem] overflow-hidden shadow-2xl mb-8 relative border-4 border-white">
+                    <div className="aspect-square bg-white rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl mb-4 md:mb-8 relative border-2 md:border-4 border-white">
                       <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=faculty${i}`} alt="Faculty" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-8">
-                         <Linkedin className="text-white w-10 h-10 hover:scale-125 cursor-pointer transition-transform" />
-                         <Mail className="text-white w-10 h-10 hover:scale-125 cursor-pointer transition-transform" />
+                      <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-4 md:space-x-8">
+                         <Linkedin className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
+                         <Mail className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
                       </div>
                     </div>
-                    <h4 className="font-serif font-bold text-3xl mb-2">Faculty Name</h4>
-                    <p className="text-muted-foreground text-xl">Advisor</p>
+                    <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Faculty Name</h4>
+                    <p className="text-muted-foreground text-sm md:text-xl">Advisor</p>
                   </div>
                 ))}
               </div>
@@ -160,18 +160,18 @@ export default function Home() {
 
             <div>
               <h2 className="text-5xl font-serif font-bold mb-16 text-center text-secondary-foreground">Designers</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:gap-16 max-w-4xl mx-auto">
                 {[3, 4].map((i) => (
                   <div key={i} className="group text-center">
-                    <div className="aspect-square bg-white rounded-[3rem] overflow-hidden shadow-2xl mb-8 relative border-4 border-white">
+                    <div className="aspect-square bg-white rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl mb-4 md:mb-8 relative border-2 md:border-4 border-white">
                       <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=designer${i}`} alt="Designer" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-secondary/90 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-8">
-                         <Linkedin className="text-white w-10 h-10 hover:scale-125 cursor-pointer transition-transform" />
-                         <Github className="text-white w-10 h-10 hover:scale-125 cursor-pointer transition-transform" />
+                      <div className="absolute inset-0 bg-secondary/90 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-4 md:space-x-8">
+                         <Linkedin className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
+                         <Github className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
                       </div>
                     </div>
-                    <h4 className="font-serif font-bold text-3xl mb-2">Designer Name</h4>
-                    <p className="text-muted-foreground text-xl">Tech Lead</p>
+                    <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Designer Name</h4>
+                    <p className="text-muted-foreground text-sm md:text-xl">Tech Lead</p>
                   </div>
                 ))}
               </div>
