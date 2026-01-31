@@ -79,7 +79,7 @@ export default function Home() {
                       {aboutContent[lang].text}
                     </p>
                     
-                    <Button className="bg-primary hover:bg-primary/90 text-white text-lg px-6 py-4 rounded-full shadow-md hover:shadow-lg transition-all scale-90 md:scale-100">
+                    <Button className="bg-primary hover:bg-primary/90 text-white text-base px-5 py-3 rounded-full shadow-md hover:shadow-lg transition-all">
                       {aboutContent[lang].button}
                     </Button>
                   </motion.div>
@@ -91,13 +91,13 @@ export default function Home() {
 
         <NoticeBoard />
 
-        {/* Events Section - Redesigned Cards */}
+        {/* Events Section - Redesigned Cards with Title Case */}
         <section id="events" className="w-full py-20 bg-slate-50/50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex flex-col items-center mb-16">
-              <div className="w-24 h-1 bg-secondary rounded-full mb-4"></div>
-              <h2 className="text-6xl font-serif font-bold text-foreground">Events</h2>
-              <div className="w-24 h-1 bg-secondary rounded-full mt-4"></div>
+              <div className="w-20 h-1 bg-secondary rounded-full mb-4"></div>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">Events</h2>
+              <div className="w-20 h-1 bg-secondary rounded-full mt-4"></div>
             </div>
 
             <div className="flex flex-col space-y-12">
@@ -117,16 +117,16 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent"></div>
                   
-                  <div className="absolute bottom-10 left-10 right-10 flex items-end justify-between">
+                  <div className="absolute bottom-6 right-6 left-6 md:bottom-10 md:left-10 md:right-10 flex items-end justify-between">
                     <div>
-                      <div className="w-16 h-1.5 bg-secondary rounded-full mb-4"></div>
-                      <h3 className="text-5xl md:text-6xl font-serif font-bold text-white uppercase tracking-tight">{event.title}</h3>
+                      <div className="w-12 h-1 bg-secondary rounded-full mb-3"></div>
+                      <h3 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight">{event.title}</h3>
                     </div>
                     
-                    <button className="bg-white/10 hover:bg-secondary text-white p-4 rounded-2xl backdrop-blur-md transition-all duration-300 group/btn shadow-2xl border border-white/20">
-                      <span className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs md:text-sm px-4">
+                    <button className="bg-white/10 hover:bg-secondary text-white p-2.5 md:p-3.5 rounded-xl backdrop-blur-md transition-all duration-300 group/btn shadow-2xl border border-white/20">
+                      <span className="flex items-center gap-2 font-black uppercase tracking-[0.1em] text-[10px] md:text-xs px-2 md:px-4">
                         View
-                        <ArrowUpRight className="group-hover/btn:translate-x-2 group-hover/btn:-translate-y-2 transition-transform w-5 h-5" />
+                        <ArrowUpRight className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform w-3.5 h-3.5 md:w-4 md:h-4" />
                       </span>
                     </button>
                   </div>

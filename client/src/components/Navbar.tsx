@@ -42,9 +42,9 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
-      <div className="w-full px-6 h-20 flex items-center justify-between">
-        {/* Left Logo */}
-        <div className="flex-shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 border-white/50 shadow-lg bg-white p-1">
+      <div className="w-full px-4 h-16 flex items-center justify-between">
+        {/* Left Logo - Reduced size and moved to corner */}
+        <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden border-2 border-white/50 shadow-lg bg-white p-1">
           <img 
             src="/src/assets/deity_logo.png" 
             alt="Telugu Samiti Logo" 
@@ -52,8 +52,8 @@ export function Navbar() {
           />
         </div>
         
-        {/* Centered Symmetrical Title */}
-        <div className="flex-grow flex items-center justify-center overflow-hidden px-4">
+        {/* Centered Symmetrical Title - Dynamically scaling and bold */}
+        <div className="flex-grow flex items-center justify-center overflow-hidden px-2">
           <AnimatePresence mode="wait">
             <motion.div
               key={isTelugu ? "telugu" : "english"}
@@ -63,18 +63,18 @@ export function Navbar() {
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="w-full text-center"
             >
-              <h1 className="text-[clamp(1.5rem,6vw,4rem)] font-serif font-bold text-white drop-shadow-[0_0_20px_rgba(255,215,0,0.9)] whitespace-nowrap leading-tight transition-all duration-500">
-                {isTelugu ? "తెలుగు సమితి, ఐఐటీ ఢిల్లీ" : "Telugu Samiti, IIT Delhi"}
+              <h1 className="text-[clamp(1.2rem,10vw,5rem)] font-serif font-extrabold text-white drop-shadow-[0_0_20px_rgba(255,215,0,0.9)] whitespace-nowrap leading-tight transition-all duration-500 uppercase tracking-tight">
+                {isTelugu ? "తెలుగు సమితి" : "Telugu Samiti"}
               </h1>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Right Hamburger Menu */}
+        {/* Right Hamburger Menu - Reduced size and moved to corner */}
         <div className="flex-shrink-0">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-full text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-full text-white hover:bg-white/10 transition-colors"
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -84,7 +84,7 @@ export function Navbar() {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
                 >
-                  <X size={40} />
+                  <X size={32} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -92,11 +92,11 @@ export function Navbar() {
                   initial={{ rotate: 90, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: -90, opacity: 0 }}
-                  className="flex flex-col space-y-2"
+                  className="flex flex-col space-y-1.5"
                 >
-                  <span className="w-10 h-1 bg-white rounded-full shadow-md"></span>
-                  <span className="w-10 h-1 bg-white rounded-full shadow-md"></span>
-                  <span className="w-10 h-1 bg-white rounded-full shadow-md"></span>
+                  <span className="w-8 h-0.5 bg-white rounded-full shadow-md"></span>
+                  <span className="w-8 h-0.5 bg-white rounded-full shadow-md"></span>
+                  <span className="w-8 h-0.5 bg-white rounded-full shadow-md"></span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -118,7 +118,7 @@ export function Navbar() {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="text-2xl font-serif font-medium text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
+                  className="text-xl font-serif font-medium text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
