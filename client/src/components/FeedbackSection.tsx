@@ -1,35 +1,27 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, useInView, useSpring, useTransform } from "framer-motion";
 import { Heart, Smile, Meh, Frown } from "lucide-react";
 import { useRef } from "react";
 
-export function FeedbackSection() {
-  const [clickCount, setClickCount] = useState(12500);
-  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
-  const counterRef = useRef(null);
-  const isInView = useInView(counterRef, { once: true });
-  
-  const [displayCount, setDisplayCount] = useState(0);
+function RollingNumber({ value, isInView }: { value: number; isInView: boolean }) {
+  const spring = useSpring(0, { stiffness: 40, damping: 20 });
+  const displayValue = useTransform(spring, (current) => current.toFixed(1));
 
   useEffect(() => {
     if (isInView) {
-      let start = 0;
-      const end = 12.5;
-      const duration = 2000;
-      const increment = end / (duration / 16);
-      
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setDisplayCount(end);
-          clearInterval(timer);
-        } else {
-          setDisplayCount(start);
-        }
-      }, 16);
-      return () => clearInterval(timer);
+      spring.set(value);
+    } else {
+      spring.set(0);
     }
-  }, [isInView]);
+  }, [isInView, value, spring]);
+
+  return <span>{displayValue}</span>;
+}
+
+export function FeedbackSection() {
+  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
+  const counterRef = useRef(null);
+  const isInView = useInView(counterRef, { amount: 0.5 });
 
   const handleEmojiClick = (emoji: string) => {
     setSelectedEmoji(prev => prev === emoji ? null : emoji);
@@ -54,7 +46,7 @@ export function FeedbackSection() {
         >
           <div ref={counterRef} className="flex flex-col items-center">
             <h3 className="text-3xl font-serif font-bold text-foreground mb-2">
-              Total Visits: <span className="text-primary tabular-nums">{displayCount.toFixed(1)}K</span>
+              Total Visits: <span className="text-primary tabular-nums"><RollingNumber value={12.5} isInView={isInView} />K</span>
             </h3>
             <p className="text-muted-foreground text-lg italic">Join the community growing everyday!</p>
           </div>

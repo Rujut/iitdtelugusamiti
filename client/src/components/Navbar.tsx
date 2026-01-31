@@ -43,7 +43,7 @@ export function Navbar() {
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
       <div className="w-full px-4 h-16 flex items-center justify-between">
-        {/* Left Logo - Reduced size and moved to corner */}
+        {/* Left Logo */}
         <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden border-2 border-white/50 shadow-lg bg-white p-1">
           <img 
             src="/src/assets/deity_logo.png" 
@@ -52,7 +52,7 @@ export function Navbar() {
           />
         </div>
         
-        {/* Centered Symmetrical Title - Dynamically scaling and bold */}
+        {/* Centered Symmetrical Title - Reduced Boldness and Matching Events Heading Size */}
         <div className="flex-grow flex items-center justify-center overflow-hidden px-2">
           <AnimatePresence mode="wait">
             <motion.div
@@ -63,14 +63,14 @@ export function Navbar() {
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="w-full text-center"
             >
-              <h1 className="text-[clamp(1.2rem,10vw,5rem)] font-serif font-extrabold text-white drop-shadow-[0_0_20px_rgba(255,215,0,0.9)] whitespace-nowrap leading-tight transition-all duration-500 uppercase tracking-tight">
+              <h1 className="text-[clamp(1rem,5vw,3rem)] font-serif font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] whitespace-nowrap leading-tight transition-all duration-500 tracking-tight">
                 {isTelugu ? "తెలుగు సమితి" : "Telugu Samiti"}
               </h1>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Right Hamburger Menu - Reduced size and moved to corner */}
+        {/* Right Hamburger Menu */}
         <div className="flex-shrink-0">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -104,7 +104,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Menu List with Gradient Transition */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

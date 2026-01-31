@@ -34,10 +34,10 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full bg-background font-sans selection:bg-primary/20">
+    <div className="w-full bg-background font-sans selection:bg-primary/20 flex flex-col min-h-screen">
       <Navbar />
       
-      <main className="w-full">
+      <main className="w-full flex-grow">
         <HeroSlideshow />
 
         {/* Subtle Modern Line Separator */}
@@ -91,12 +91,12 @@ export default function Home() {
 
         <NoticeBoard />
 
-        {/* Events Section - Redesigned Cards with Title Case */}
+        {/* Events Section */}
         <section id="events" className="w-full py-20 bg-slate-50/50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex flex-col items-center mb-16">
               <div className="w-20 h-1 bg-secondary rounded-full mb-4"></div>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">Events</h2>
+              <h2 className="text-[clamp(1rem,5vw,3rem)] font-serif font-bold text-foreground">Events</h2>
               <div className="w-20 h-1 bg-secondary rounded-full mt-4"></div>
             </div>
 
@@ -183,30 +183,32 @@ export default function Home() {
 
       </main>
 
-      <footer className="bg-[#111] text-white py-20 border-t border-white/5">
+      <footer className="bg-[#111] text-white py-12 border-t border-white/5 mt-auto">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
-          <div className="flex items-center gap-6 mb-12">
-             <div className="w-20 h-20 rounded-full bg-white p-1 shadow-2xl">
+          <div className="flex items-center gap-6 mb-10">
+             <div className="w-16 h-16 rounded-full bg-white p-1 shadow-2xl">
                 <img src="/src/assets/logo.png" alt="Logo" className="w-full h-full object-contain rounded-full" />
              </div>
              <div className="text-left">
-               <h4 className="font-serif font-bold text-3xl">Telugu Samiti</h4>
-               <p className="text-white/40 text-lg">IIT Delhi</p>
+               <h4 className="font-serif font-bold text-2xl">Telugu Samiti</h4>
+               <p className="text-white/40 text-base">IIT Delhi</p>
              </div>
           </div>
           
-          <div className="mb-12">
-            <h5 className="text-lg font-bold uppercase tracking-[0.3em] text-white/60 mb-8">Follow us on</h5>
-            <div className="flex space-x-12">
-              <a href="#" className="text-[#E4405F] hover:scale-125 transition-all drop-shadow-lg"><Instagram size={40} /></a>
-              <a href="#" className="text-[#0A66C2] hover:scale-125 transition-all drop-shadow-lg"><Linkedin size={40} /></a>
-              <a href="#" className="text-[#EA4335] hover:scale-125 transition-all drop-shadow-lg"><Mail size={40} /></a>
+          <div className="mb-10">
+            <h5 className="text-sm font-bold uppercase tracking-[0.3em] text-white/60 mb-6">Follow us on</h5>
+            <div className="flex space-x-10">
+              <a href="#" className="text-[#E4405F] hover:scale-125 transition-all drop-shadow-lg"><Instagram size={32} /></a>
+              <a href="#" className="text-[#0A66C2] hover:scale-125 transition-all drop-shadow-lg"><Linkedin size={32} /></a>
+              <a href="#" className="text-[#EA4335] hover:scale-125 transition-all drop-shadow-lg"><Mail size={32} /></a>
             </div>
           </div>
 
-          <div className="pt-12 border-t border-white/5 w-full flex flex-col items-center space-y-4">
-            <p className="text-white/30 text-lg">© 2026 Telugu Samiti IIT Delhi. Telugu Samiti Tech Team.</p>
-            <p className="text-white/60 text-xl font-medium flex items-center gap-3">
+          <div className="pt-8 border-t border-white/5 w-full flex flex-col items-center space-y-3">
+            <p className="text-[clamp(0.5rem,3vw,1.1rem)] text-white/30 whitespace-nowrap overflow-hidden">
+              © 2026 Telugu Samiti IIT Delhi. Telugu Samiti Tech Team.
+            </p>
+            <p className="text-white/60 text-lg font-medium flex items-center gap-3">
               Made with <motion.span animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 0.8 }}>❤️</motion.span> by Telugu Samiti Tech Team
             </p>
           </div>

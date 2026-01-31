@@ -12,10 +12,10 @@ export function NoticeBoard() {
   return (
     <section className="container mx-auto px-4 py-16 relative z-40">
       <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-border/50">
-        <div className="bg-primary px-6 py-4 flex items-center justify-center">
-          <div className="flex items-center space-x-3">
-            <Bell className="text-white w-6 h-6 animate-bounce" />
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-white tracking-wide">Announcements</h2>
+        <div className="bg-primary px-6 py-5 flex items-center justify-center">
+          <div className="flex items-center space-x-4">
+            <Bell className="text-white w-8 h-8 animate-bounce" />
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-wide">Announcements</h2>
           </div>
         </div>
         
