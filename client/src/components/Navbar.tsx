@@ -52,7 +52,7 @@ export function Navbar() {
           />
         </div>
         
-        {/* Centered Symmetrical Title - Reduced Boldness and Matching Events Heading Size */}
+        {/* Centered Symmetrical Title - Matching Slideshow Subtitle Size */}
         <div className="flex-grow flex items-center justify-center overflow-hidden px-2">
           <AnimatePresence mode="wait">
             <motion.div
@@ -63,7 +63,7 @@ export function Navbar() {
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="w-full text-center"
             >
-              <h1 className="text-[clamp(1rem,5vw,3rem)] font-serif font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] whitespace-nowrap leading-tight transition-all duration-500 tracking-tight">
+              <h1 className="text-[clamp(0.875rem,2vw,2.25rem)] font-sans font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] whitespace-nowrap leading-tight transition-all duration-500 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
                 {isTelugu ? "తెలుగు సమితి" : "Telugu Samiti"}
               </h1>
             </motion.div>

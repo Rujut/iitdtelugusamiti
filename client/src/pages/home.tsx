@@ -4,7 +4,7 @@ import { NoticeBoard } from "@/components/NoticeBoard";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Languages, Github, Linkedin, Twitter, Instagram, ArrowUpRight, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, ArrowUpRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const aboutContent = {
@@ -43,7 +43,7 @@ export default function Home() {
         {/* Subtle Modern Line Separator */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-border/50 to-transparent my-12" />
 
-        {/* About Section */}
+        {/* About Section with Toggle Switch */}
         <section id="about" className="w-full py-16 px-4 md:px-0 bg-background relative z-30">
           <div className="max-w-7xl mx-auto flex flex-col items-center">
             <motion.div
@@ -59,21 +59,30 @@ export default function Home() {
                   <h3 className="text-4xl md:text-5xl font-serif font-bold text-primary">
                     {aboutContent[lang].title}
                   </h3>
-                  <button 
-                    onClick={toggleLang}
-                    className="p-4 rounded-full bg-muted hover:bg-secondary/20 transition-all text-primary shadow-sm hover:shadow-md active:scale-95"
-                  >
-                    <Languages size={28} />
-                  </button>
+                  
+                  {/* Language Toggle Switch */}
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-bold text-primary font-mono">{lang === 'english' ? 'Telugu అ' : 'English A'}</span>
+                    <button 
+                      onClick={toggleLang}
+                      className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${lang === 'telugu' ? 'bg-primary' : 'bg-muted'}`}
+                    >
+                      <motion.div 
+                        animate={{ x: lang === 'telugu' ? 28 : 2 }}
+                        className="absolute top-1 left-0 w-5 h-5 bg-white rounded-full shadow-sm"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    </button>
+                  </div>
                 </div>
 
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={lang}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.5 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-10">
                       {aboutContent[lang].text}
@@ -91,12 +100,12 @@ export default function Home() {
 
         <NoticeBoard />
 
-        {/* Events Section */}
+        {/* Events Section - Matching Slideshow Subtitle Size */}
         <section id="events" className="w-full py-20 bg-slate-50/50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex flex-col items-center mb-16">
               <div className="w-20 h-1 bg-secondary rounded-full mb-4"></div>
-              <h2 className="text-[clamp(1.5rem,5vw,3rem)] font-serif font-bold text-foreground">Events</h2>
+              <h2 className="text-[clamp(0.875rem,2vw,2.25rem)] font-sans font-bold text-foreground uppercase tracking-[0.2em] sm:tracking-[0.3em]">Events</h2>
               <div className="w-20 h-1 bg-secondary rounded-full mt-4"></div>
             </div>
 
@@ -136,7 +145,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Grouped Contributor Sections */}
+        {/* Grouped Contributor Sections with Inline Arrow Links */}
         <section className="bg-muted/10 py-24 border-y border-border/30">
           <div className="max-w-7xl mx-auto px-4">
             <div className="mb-24">
@@ -151,7 +160,10 @@ export default function Home() {
                          <Mail className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
                       </div>
                     </div>
-                    <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Faculty Name</h4>
+                    <div className="flex items-center justify-center gap-2">
+                      <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Faculty Name</h4>
+                      <ArrowUpRight className="w-5 h-5 text-primary cursor-pointer hover:scale-110 transition-transform" />
+                    </div>
                     <p className="text-muted-foreground text-sm md:text-xl">Advisor</p>
                   </div>
                 ))}
@@ -170,7 +182,10 @@ export default function Home() {
                          <Github className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
                       </div>
                     </div>
-                    <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Designer Name</h4>
+                    <div className="flex items-center justify-center gap-2">
+                      <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Designer Name</h4>
+                      <ArrowUpRight className="w-5 h-5 text-secondary-foreground cursor-pointer hover:scale-110 transition-transform" />
+                    </div>
                     <p className="text-muted-foreground text-sm md:text-xl">Tech Lead</p>
                   </div>
                 ))}
@@ -205,11 +220,11 @@ export default function Home() {
           </div>
 
           <div className="pt-8 border-t border-white/5 w-full flex flex-col items-center space-y-3">
-            <p className="text-[clamp(0.5rem,3vw,1.1rem)] text-white/30 whitespace-nowrap overflow-hidden">
-              © 2026 Telugu Samiti IIT Delhi. Telugu Samiti Tech Team.
-            </p>
-            <p className="text-white/60 text-lg font-medium flex items-center gap-3">
+            <p className="text-[clamp(0.5rem,3.5vw,1.1rem)] text-white/60 font-medium flex items-center justify-center gap-3 w-full whitespace-nowrap overflow-hidden">
               Made with <motion.span animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 0.8 }}>❤️</motion.span> by Telugu Samiti Tech Team
+            </p>
+            <p className="text-[clamp(0.4rem,3vw,1rem)] text-white/30 whitespace-nowrap overflow-hidden w-full text-center">
+              © 2026 Telugu Samiti IIT Delhi. Telugu Samiti Tech Team.
             </p>
           </div>
         </div>
