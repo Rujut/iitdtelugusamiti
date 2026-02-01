@@ -42,7 +42,7 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
-      <div className="w-full px-4 h-16 flex items-center justify-between">
+      <div className="w-full px-4 h-16 flex items-center justify-between overflow-hidden">
         {/* Left Logo */}
         <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden border-2 border-white/50 shadow-lg bg-white p-1">
           <img 
@@ -52,18 +52,18 @@ export function Navbar() {
           />
         </div>
         
-        {/* Centered Symmetrical Title - Matching Slideshow Subtitle Size */}
-        <div className="flex-grow flex items-center justify-center overflow-hidden px-2">
+        {/* Centered Symmetrical Title - Top-to-Bottom Entrance & Glow */}
+        <div className="flex-grow flex items-center justify-center h-full relative overflow-hidden px-2">
           <AnimatePresence mode="wait">
             <motion.div
               key={isTelugu ? "telugu" : "english"}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 50, opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="w-full text-center"
             >
-              <h1 className="text-[clamp(0.875rem,2vw,2.25rem)] font-sans font-bold text-white drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] whitespace-nowrap leading-tight transition-all duration-500 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
+              <h1 className="text-[clamp(0.875rem,2vw,2.25rem)] font-sans font-bold text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.8)] whitespace-nowrap uppercase tracking-[0.2em] sm:tracking-[0.3em] transition-all duration-500">
                 {isTelugu ? "తెలుగు సమితి" : "Telugu Samiti"}
               </h1>
             </motion.div>

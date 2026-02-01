@@ -26,6 +26,14 @@ const EVENTS = [
   { id: 3, title: "Farewell", image: "/src/assets/farewell.png" },
 ];
 
+// Custom paths for member links
+const MEMBER_LINKS = {
+  faculty1: "#faculty-1-profile",
+  faculty2: "#faculty-2-profile",
+  designer1: "#designer-1-profile",
+  designer2: "#designer-2-profile",
+};
+
 export default function Home() {
   const [lang, setLang] = useState<"english" | "telugu">("english");
 
@@ -145,7 +153,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Grouped Contributor Sections with Inline Arrow Links */}
+        {/* Grouped Contributor Sections with Functional Inline Links */}
         <section className="bg-muted/10 py-24 border-y border-border/30">
           <div className="max-w-7xl mx-auto px-4">
             <div className="mb-24">
@@ -160,10 +168,13 @@ export default function Home() {
                          <Mail className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
                       </div>
                     </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Faculty Name</h4>
-                      <ArrowUpRight className="w-5 h-5 text-primary cursor-pointer hover:scale-110 transition-transform" />
-                    </div>
+                    <a 
+                      href={MEMBER_LINKS[`faculty${i}` as keyof typeof MEMBER_LINKS]} 
+                      className="flex items-center justify-center gap-2 group/link"
+                    >
+                      <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2 group-hover/link:text-primary transition-colors">Faculty Name</h4>
+                      <ArrowUpRight className="w-5 h-5 text-primary group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                    </a>
                     <p className="text-muted-foreground text-sm md:text-xl">Advisor</p>
                   </div>
                 ))}
@@ -182,10 +193,13 @@ export default function Home() {
                          <Github className="text-white w-6 h-6 md:w-10 md:h-10 hover:scale-125 cursor-pointer transition-transform" />
                       </div>
                     </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2">Designer Name</h4>
-                      <ArrowUpRight className="w-5 h-5 text-secondary-foreground cursor-pointer hover:scale-110 transition-transform" />
-                    </div>
+                    <a 
+                      href={MEMBER_LINKS[`designer${i-2}` as keyof typeof MEMBER_LINKS]} 
+                      className="flex items-center justify-center gap-2 group/link"
+                    >
+                      <h4 className="font-serif font-bold text-xl md:text-3xl mb-1 md:mb-2 group-hover/link:text-secondary-foreground transition-colors">Designer Name</h4>
+                      <ArrowUpRight className="w-5 h-5 text-secondary-foreground group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                    </a>
                     <p className="text-muted-foreground text-sm md:text-xl">Tech Lead</p>
                   </div>
                 ))}
