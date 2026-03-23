@@ -2,7 +2,7 @@
 
 Official website of the **Telugu Samiti, IIT Delhi** — a cultural organization bringing together Telugu students, staff, and faculty at IIT Delhi.
 
-🌐 **Live Site:** [iitdtelugusamiti.com](https://iitdtelugusamiti.com) *(update with actual URL)*
+🌐 **Live Site:** [iitdtelugusamiti.com](https://iitdtelugusamiti.com) 
 
 ---
 
