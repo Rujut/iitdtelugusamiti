@@ -79,7 +79,7 @@ npm install
 npm run dev:client
 ```
 
-Frontend runs on `http://localhost:5173`
+Frontend runs on `http://localhost:5000`
 
 ### Build for Production
 
