@@ -115,30 +115,6 @@ All animations use **Framer Motion** with:
 
 ---
 
-## 📬 Contact
-
-- 📧 **Email:** techteam.iitdtelugusamiti@gmail.com
-- 📸 **Instagram:** [@iitd_telugusamiti](https://www.instagram.com/iitd_telugusamiti)
-- 💼 **LinkedIn:** [IITD Telugu Samiti](https://www.linkedin.com/company/iitd-telugu-samiti/)
-- ▶️ **YouTube:** [Telugu Yuvatharami IITD](https://www.youtube.com/@teluguyuvatharamiitd)
-
----
-
-## 👨‍💻 Built By
-
-**Telugu Samiti Tech Team, IIT Delhi**
-
-| Name | Role |
-|------|------|
-| Siddhartha Roy | Tech Lead (Frontend) |
-| Rahul Reddy | Tech Lead (Frontend) |
-
-**Faculty Advisors:**
-- Prof. Kunchala Ravi Kumar
-- Prof. Digavalli Ravi Kumar
-
----
-
 ## 📄 License
 
 © 2026 Telugu Samiti, IIT Delhi. All Rights Reserved.
