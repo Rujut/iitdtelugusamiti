@@ -1,89 +1,91 @@
 import { useState, useEffect } from "react";
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { Heart, Smile, Meh, Frown } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Smile, Meh, Frown, Send } from "lucide-react";
 import { useRef } from "react";
 
-function RollingNumber({ value, isInView }: { value: number; isInView: boolean }) {
-  const spring = useSpring(0, { stiffness: 40, damping: 20 });
-  const [displayValue, setDisplayValue] = useState("0.0");
-
-  useEffect(() => {
-    if (isInView) {
-      spring.set(value);
-    } else {
-      spring.set(0);
-    }
-  }, [isInView, value, spring]);
-
-  useEffect(() => {
-    const unsubscribe = spring.on("change", (latest) => {
-      setDisplayValue(latest.toFixed(1));
-    });
-    return () => unsubscribe();
-  }, [spring]);
-
-  return <span>{displayValue}</span>;
-}
-
 export function FeedbackSection() {
-  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
-  const counterRef = useRef(null);
-  const isInView = useInView(counterRef, { amount: 0.5 });
-
-  const handleEmojiClick = (emoji: string) => {
-    setSelectedEmoji(prev => prev === emoji ? null : emoji);
-  };
+  const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
+  const [feedback, setFeedback] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const emojis = [
-    { icon: Heart, label: "Loved it", color: "text-red-500" },
-    { icon: Smile, label: "Good", color: "text-yellow-500" },
-    { icon: Meh, label: "Okay", color: "text-blue-500" },
-    { icon: Frown, label: "Bad", color: "text-gray-500" },
+    { icon: Frown, label: "Poor", color: "text-red-500" },
+    { icon: Meh, label: "Average", color: "text-yellow-500" },
+    { icon: Smile, label: "Great", color: "text-green-500" }
   ];
 
-  return (
-    <section className="container mx-auto px-4 py-16">
-      <div className="grid md:grid-cols-2 gap-8 items-stretch">
-        {/* Total Visits Card */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="section-box bg-white p-10 flex flex-col items-center justify-center text-center space-y-4"
-        >
-          <div ref={counterRef} className="flex flex-col items-center">
-            <h3 className="text-3xl font-serif font-bold text-foreground mb-2">
-              Total Visits: <span className="text-primary tabular-nums"><RollingNumber value={12.5} isInView={isInView} />K</span>
-            </h3>
-            <p className="text-muted-foreground text-lg italic">Join the community growing everyday!</p>
-          </div>
-        </motion.div>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    setTimeout(() => setIsSubmitted(false), 3000);
+  };
 
-        {/* Feedback System */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+  return (
+    <section id="feedback" className="w-full py-20 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="section-box bg-white p-10 space-y-8 flex flex-col justify-center"
+          className="w-full max-w-xl bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-border/50 relative z-10"
         >
-          <h3 className="text-3xl font-serif font-bold text-foreground text-center">How was your experience?</h3>
-          
-          <div className="flex justify-center gap-10">
-            {emojis.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleEmojiClick(item.label)}
-                className={`flex flex-col items-center gap-3 transition-all duration-300 transform ${selectedEmoji === item.label ? 'scale-125' : 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0'}`}
-              >
-                <item.icon className={`w-12 h-12 ${item.color} ${selectedEmoji === item.label ? 'fill-current' : ''}`} />
-                <span className={`text-sm font-bold ${selectedEmoji === item.label ? 'text-foreground' : 'text-muted-foreground'}`}>
-                  {item.label}
-                </span>
-              </button>
-            ))}
+          <div className="text-center mb-6">
+            <h3 className="text-xl md:text-2xl font-serif font-bold text-primary mb-2">
+		  How was your experience?
+		</h3>
+		<p className="text-sm md:text-base text-muted-foreground">
+		  Your feedback helps us improve the Telugu Samiti community.
+		</p>
+
           </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="flex justify-center gap-4 md:gap-8">
+              {emojis.map((emoji, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() =>
+  setSelectedEmoji(prev => (prev === index ? null : index))
+}
+
+                  className={`flex flex-col items-center gap-2 transition-all duration-300 group ${selectedEmoji === index ? 'scale-110' : 'opacity-60 grayscale hover:opacity-100 hover:grayscale-0'}`}
+                >
+                  <div className={`p-3 rounded-xl bg-muted group-hover:bg-white group-hover:shadow-lg transition-all ${selectedEmoji === index ? 'bg-white shadow-lg ring-2 ring-primary/20' : ''}`}>
+                    <emoji.icon className={`w-8 h-8 md:w-10 md:h-10 ${selectedEmoji === index ? emoji.color : 'text-muted-foreground group-hover:' + emoji.color}`} />
+                  </div>
+                  <span className={`text-sm font-bold uppercase tracking-widest ${selectedEmoji === index ? 'text-primary' : 'text-muted-foreground'}`}>{emoji.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="relative">
+              <textarea
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="Share your thoughts..."
+                className="w-full bg-muted/50 border-none rounded-xl p-4 min-h-[50px] focus:ring-2 focus:ring-primary/20 transition-all text-lg"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitted}
+              className={`w-full bg-primary hover:bg-primary/90 text-white h-12 rounded-xl text-lg font-bold shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-3 ${isSubmitted ? 'opacity-70 cursor-not-allowed' : ''}`}
+            >
+              {isSubmitted ? (
+                "Thanks for your feedback!"
+              ) : (
+                <>
+                  Send Feedback
+                  <Send className="w-5 h-5" />
+                </>
+              )}
+            </button>
+          </form>
         </motion.div>
       </div>
     </section>
   );
 }
+
